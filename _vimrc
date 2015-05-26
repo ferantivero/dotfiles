@@ -125,7 +125,7 @@ let g:OmniSharp_host = "http://localhost:2000"
 
 "Timeout in seconds to wait for a response from the server
 let g:OmniSharp_timeout = 1
-
+"let g:OmniSharp_server_type = 'roslyn'
 "Showmatch significantly slows down omnicomplete
 "when the first match contains parentheses.
 set noshowmatch
@@ -159,7 +159,7 @@ augroup omnisharp_commands
     autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
     " Synchronous build (blocks Vim)
-    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
+    autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
     " Builds can also run asynchronously with vim-dispatch installed
     autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
     " automatic syntax check on events (TextChanged requires Vim 7.4)
@@ -178,8 +178,7 @@ augroup omnisharp_commands
     autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
     autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
     autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
-    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr> "finds members in the current buffer
-    " cursor can be anywhere on the line containing an issue 
+    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr> 
     autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>  
     autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
     autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
@@ -221,3 +220,8 @@ nnoremap <leader>th :OmniSharpHighlightTypes<cr>
 "Don't ask to save when changing buffers (i.e. when jumping to a type definition)
 set hidden
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+
+
+"CtrlP
+
+let g:ctrlp_working_path_mode = 'rc'
