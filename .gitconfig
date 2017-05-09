@@ -1,0 +1,29 @@
+[user]
+	name = Fernando Antivero (PATTERNS AND PRACTICES)
+	email = v-feanti@microsoft.com
+[alias]
+	k = log --graph --decorate --oneline --all
+	b = branch -a -v
+	co = checkout
+	a = add
+	c = commit
+	f = fetch
+	d = diff
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
