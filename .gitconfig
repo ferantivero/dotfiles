@@ -1,6 +1,6 @@
 [user]
-	name = Fernando Antivero (PATTERNS AND PRACTICES)
-	email = v-feanti@microsoft.com
+	name = Fer Antivero 
+	email = 
 [alias]
 	k = log --graph --decorate --oneline --all
 	b = branch -a -v
