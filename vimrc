@@ -86,6 +86,7 @@ Plugin 'ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'fugitive.vim'
 Plugin 'Syntastic'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
