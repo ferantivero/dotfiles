@@ -28,7 +28,7 @@ set tabstop=4                   " a tab is two spaces
 
 " Visual Settings
 set number                      " show line numbers
-" set relativenumber              " shows numbers relative to the current line
+"set relativenumber              " shows numbers relative to the current line
 set showcmd                     " show the very last command in the bottom right
 set autoindent                  " always set autoindenting on
 set copyindent                  " copy the previous indentation on autoindenting
@@ -45,7 +45,7 @@ set showmatch
 set nowrap
 set undofile
 set ignorecase
-set smartcase 
+set smartcase
 set cursorline
 
 set hidden
@@ -58,7 +58,7 @@ syntax on
 syntax enable
 
 " Color scheme for vimdiff
-colorscheme atom-dark 
+colorscheme atom-dark
 highlight DiffAdd cterm=none ctermfg=green ctermbg=black
 highlight DiffDelete cterm=none ctermfg=darkred ctermbg=black
 highlight DiffChange cterm=none ctermfg=none ctermbg=black
@@ -78,9 +78,9 @@ map <Down> <Nop>
 if bufwinnr(1)
      map + <C-W>+
      map - <C-W>-
-     map <c-m> <c-w><
-     map <c-n> <c-w>>
-endif 
+     map <c-n> <c-w><
+     map <c-m> <c-w>>
+endif
 
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
@@ -96,6 +96,7 @@ Plugin 'bling/vim-airline'
 Plugin 'fugitive.vim'
 Plugin 'Syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'fatih/vim-go'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -152,3 +153,32 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " markdown language support
 let g:markdown_fenced_languages = ['c', 'csharp', 'go', 'typescript', 'sql', 'html', 'python', 'bash=sh', 'javascript=js', 'css', 'sass']
 let g:markdown_syntax_conceal = 0
+
+function! DoPrettyXML()
+  " save the filetype so we can restore it later
+  let l:origft = &ft
+  set ft=
+  " delete the xml header if it exists. This will
+  " permit us to surround the document with fake tags
+  " without creating invalid xml.
+  1s/<?xml .*?>//e
+  " insert fake tags around the entire document.
+  " This will permit us to pretty-format excerpts of
+  " XML that may contain multiple top-level elements.
+  0put ='<PrettyXML>'
+  $put ='</PrettyXML>'
+  silent %!xmllint --format -
+  " xmllint will insert an <?xml?> header. it's easy enough to delete
+  " if you don't want it.
+  " delete the fake tags
+  2d
+  $d
+  " restore the 'normal' indentation, which is one extra level
+  " too deep due to the extra tags we wrapped around the document.
+  silent %<
+  " back to home
+  1
+  " restore the filetype
+  exe "set ft=" . l:origft
+endfunction
+command! PrettyXML call DoPrettyXML()
