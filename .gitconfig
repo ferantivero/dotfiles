@@ -1,14 +1,18 @@
 [user]
-	name = Fer Antivero 
-	email = 
+	name = ferantivero
+	email = v-fean@microsoft.com
 [alias]
 	k = log --graph --decorate --oneline --all
-	b = branch -a -v
-	co = checkout
+    r = log -g --abbrev-commit --pretty=oneline #reflog show
+    b = branch -a -v
+    br = branch -m
+    co = checkout
+    ca = commit --amend
 	a = add
-	c = commit
+	c = commit -m
 	f = fetch
-	d = diff
+	d = difftool
+	s = status
 [color]
 	branch = auto
 	diff = auto
@@ -26,5 +30,17 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [core]
-    editor = vim
+	editor = vim
+	autocrlf = false
+	filemode = true
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
