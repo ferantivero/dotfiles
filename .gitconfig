@@ -1,8 +1,11 @@
 [user]
-	name = ferantivero
-	email = v-fean@microsoft.com
+	name = Fernando Antivero
+	email = v-feanti@microsoft.com
 [alias]
-	k = log --graph --decorate --oneline --all
+	k = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+	kd = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	kdd = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+	kold = log --graph --decorate --oneline --all --date=short
     r = log -g --abbrev-commit --pretty=oneline #reflog show
     b = branch -a -v
     br = branch -m
@@ -30,7 +33,6 @@
 	added = yellow
 	changed = green
 	untracked = cyan
-
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
