@@ -142,6 +142,10 @@ alias t="tmux"
 alias ta="t a -t"
 alias tls="t ls"
 alias tn="t new -t"
+alias tks="t kill-session -t"
+export PATH=$HOME/local/bin:$PATH
+export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
+export MANPATH=$HOME/local/share/man:$MANPATH
 
 # kubectl
 alias k="kubectl"
