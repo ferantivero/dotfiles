@@ -19,4 +19,11 @@ fi
 # set PATH so it includes user's private bin directories
 SRC=~/devmac/src
 GOPATH=$HOME/go
-PATH="$HOME/bin:$HOME/.local/bin:$PATH:/usr/local/go/bin:$GOPATH/bin"
+GO111MODULE="on"
+PORTERPATH=$HOME/.porter
+NODEPATH=/usr/local/lib/nodejs/node-v10.16.1-linux-x64
+
+PATH="$HOME/bin:$HOME/.local/bin:$PATH:/usr/local/go/bin:$GOPATH/bin:$NODEPATH/bin:$PORTERPATH"
+
+GPG_TTY=$(tty)
+export GPG_TTY

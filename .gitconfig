@@ -1,10 +1,11 @@
 [user]
 	name = Fernando Antivero
 	email = v-feanti@microsoft.com
+	signingkey = 065303506425f03736b9a1333c7adc30216b0e96
 [alias]
 	k = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
 	kd = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-	kdd = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+  kdd = log --name-status --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 	kold = log --graph --decorate --oneline --all --date=short
     r = log -g --abbrev-commit --pretty=oneline #reflog show
     b = branch -a -v
@@ -43,6 +44,11 @@
 	autocrlf = false
 	filemode = true
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 [difftool]
-	prompt = false
+  	prompt = false
+    tool = vimdiff
+    #external = gitd
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential

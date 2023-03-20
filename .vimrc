@@ -12,76 +12,6 @@ else
   endif
 endif
 
-filetype plugin on
-filetype indent on
-
-set encoding=utf-8              " Necessary to show Unicode glyphs
-set showmode                    " always show what mode we're currently editing in
-set nocompatible                " be iMproved, required
-
-" Tabs vs Spaces
-set expandtab
-set smarttab
-set shiftwidth=4                " number of spaces to use for autoindenting
-set softtabstop=4               " a tab is two spaces when editing
-set tabstop=4                   " a tab is two spaces
-
-" Visual Settings
-set number                      " show line numbers
-"set relativenumber              " shows numbers relative to the current line
-set showcmd                     " show the very last command in the bottom right
-set autoindent                  " always set autoindenting on
-set copyindent                  " copy the previous indentation on autoindenting
-set smartindent
-set hlsearch                    " Hightlight words during search
-set showmatch                   " Always show matching parenthesis when one is hightlighted
-set lazyredraw                  " redraw only when we need to
-set shiftwidth=4                " number of spaces to use for autoindenting
-set textwidth=80                " Maximum width of the editor
-set colorcolumn=80              " set a colored column to avoid going too far to the right
-set hlsearch
-set incsearch
-set showmatch
-set nowrap
-set undofile
-set ignorecase
-set smartcase
-set cursorline
-
-set hidden
-set history=100
-
-" Change terminal title
-set title
-
-syntax on
-syntax enable
-
-" Color scheme for vimdiff
-colorscheme atom-dark
-highlight DiffAdd cterm=none ctermfg=green ctermbg=black
-highlight DiffDelete cterm=none ctermfg=darkred ctermbg=black
-highlight DiffChange cterm=none ctermfg=none ctermbg=black
-highlight DiffText cterm=none ctermfg=black ctermbg=darkyellow
-
-set nu
-set ic
-set wildmenu
-set guifont=Consolas:h10:cANSI
-ca tn tabnew
-ca th tabp
-ca tl tabn
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
-if bufwinnr(1)
-     map + <C-W>+
-     map - <C-W>-
-     map <c-n> <c-w><
-     map <c-m> <c-w>>
-endif
-
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -90,15 +20,30 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'fugitive.vim'
 Plugin 'Syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'fatih/vim-go'
+
+Plugin 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plugin 'leafgarland/typescript-vim'
+Plugin 'tvaintrob/bicep.vim'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+call plug#begin()
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -122,6 +67,83 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
+
+"if !exists('g:syntax_on') | syntax enable | endif
+"hi! def link jsonKeyword Identifier
+"set backspace=indent,eol,start
+
+set encoding=utf-8              " Necessary to show Unicode glyphs
+
+set showmode                    " always show what mode we're currently editing in
+set nocompatible                " be iMproved, required
+
+" Tabs vs Spaces
+set expandtab
+set smarttab
+set shiftwidth=2                " number of spaces to use for autoindenting
+set softtabstop=2               " a tab is two spaces when editing
+set tabstop=2                   " a tab is two spaces
+
+" Visual Settings
+set number                      " show line numbers
+
+"set relativenumber              " shows numbers relative to the current line
+set showcmd                     " show the very last command in the bottom right
+set autoindent                  " always set autoindenting on
+set copyindent                  " copy the previous indentation on autoindenting
+set smartindent
+set hlsearch                    " Hightlight words during search
+set showmatch                   " Always show matching parenthesis when one is hightlighted
+set lazyredraw                  " redraw only when we need to
+set shiftwidth=2                " number of spaces to use for autoindenting
+" set textwidth=80                " Maximum width of the editor
+set colorcolumn=80              " set a colored column to avoid going too far to the right
+set hlsearch
+set incsearch
+set showmatch
+set nowrap
+set undofile
+set ignorecase
+set smartcase
+set cursorline
+
+set hidden
+set history=100
+
+" Change terminal title
+set title
+
+" Color scheme for vimdiff
+" colorscheme atom-dark
+highlight DiffAdd cterm=none ctermfg=green ctermbg=black
+highlight DiffDelete cterm=none ctermfg=darkred ctermbg=black
+highlight DiffChange cterm=none ctermfg=none ctermbg=black
+highlight DiffText cterm=none ctermfg=black ctermbg=darkyellow
+highlight Directory ctermfg=40
+highlight Comment ctermfg=28
+
+" set nu
+" set ic
+" set wildmenu
+" set guifont=Consolas:h10:cANSI
+ca tn tabnew
+ca th tabp
+ca tl tabn
+
+" Shortcuts
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
+if bufwinnr(1)
+     map + <C-W>+
+     map - <C-W>-
+     map <c-n> <c-w><
+     map <c-m> <c-w>>
+endif
+map ]q :cnext <CR>
+map [q :cprevious <CR>
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " Remove whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -154,31 +176,5 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_fenced_languages = ['c', 'csharp', 'go', 'typescript', 'sql', 'html', 'python', 'bash=sh', 'javascript=js', 'css', 'sass']
 let g:markdown_syntax_conceal = 0
 
-function! DoPrettyXML()
-  " save the filetype so we can restore it later
-  let l:origft = &ft
-  set ft=
-  " delete the xml header if it exists. This will
-  " permit us to surround the document with fake tags
-  " without creating invalid xml.
-  1s/<?xml .*?>//e
-  " insert fake tags around the entire document.
-  " This will permit us to pretty-format excerpts of
-  " XML that may contain multiple top-level elements.
-  0put ='<PrettyXML>'
-  $put ='</PrettyXML>'
-  silent %!xmllint --format -
-  " xmllint will insert an <?xml?> header. it's easy enough to delete
-  " if you don't want it.
-  " delete the fake tags
-  2d
-  $d
-  " restore the 'normal' indentation, which is one extra level
-  " too deep due to the extra tags we wrapped around the document.
-  silent %<
-  " back to home
-  1
-  " restore the filetype
-  exe "set ft=" . l:origft
-endfunction
-command! PrettyXML call DoPrettyXML()
+" typescript
+let g:typescript_indent_disable = 1
