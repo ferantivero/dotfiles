@@ -159,4 +159,5 @@ if [ -f '/usr/bin/google-cloud-sdk/path.bash.inc' ]; then . '/usr/bin/google-clo
 # The next line enables shell command completion for gcloud.
 if [ -f '/usr/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/usr/bin/google-cloud-sdk/completion.bash.inc'; fi
 
-source '/home/vagrant/lib/azure-cli/az.completion'
+#IMPORTANT: exec first $curl https://raw.githubusercontent.com/Azure/azure-cli/dev/az.completion > ~/.az.completion
+source '/home/vagrant/.az.completion'
